@@ -1,0 +1,8 @@
+{
+  "name": "Routify Pro - Delivery Planner",
+  "description": "A high-performance multi-stop route optimization app for delivery drivers featuring Gemini-powered route sequencing, CSV imports, and real-time status tracking.",
+  "requestFramePermissions": [
+    "geolocation",
+    "microphone"
+  ]
+}
