@@ -2,62 +2,40 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mein Gemini Chat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Routify Pro - Intelligente Lieferroute</title>
+    <meta name="description" content="Multi-Stopp-Routenplaner für Lieferfahrer">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="importmap">
+    {
+      "imports": {
+        "react/": "https://esm.sh/react@^19.2.4/",
+        "react": "https://esm.sh/react@^19.2.4",
+        "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+        "@google/genai": "https://esm.sh/@google/genai@^1.40.0",
+        "recharts": "https://esm.sh/recharts@^3.7.0",
+        "lucide-react": "https://esm.sh/lucide-react@^0.563.0"
+      }
+    }
+    </script>
     <style>
-        body { font-family: sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; line-height: 1.6; }
-        #chat-container { border: 1px solid #ccc; padding: 20px; border-radius: 8px; background: #f9f9f9; }
-        textarea { width: 100%; height: 100px; margin-bottom: 10px; border-radius: 4px; border: 1px solid #ccc; padding: 10px; }
-        button { background: #4285f4; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; }
-        button:disabled { background: #ccc; }
-        #output { margin-top: 20px; white-space: pre-wrap; background: #eee; padding: 15px; border-radius: 4px; min-height: 50px; }
+      body {
+        -webkit-tap-highlight-color: transparent;
+        overscroll-behavior-y: contain;
+        background-color: #f8fafc;
+        margin: 0;
+        padding: 0;
+      }
+      * {
+        -webkit-overflow-scrolling: touch;
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
     </style>
 </head>
 <body>
-
-    <h2>KI Assistent</h2>
-    <div id="chat-container">
-        <p>Gib hier deinen API-Key ein (nur lokal nutzen!):</p>
-        <input type="password" id="api-key" placeholder="Dein Google API Key" style="width: 100%; margin-bottom: 20px;">
-        
-        <textarea id="user-input" placeholder="Frag mich etwas..."></textarea>
-        <button id="send-btn">Antwort generieren</button>
-
-        <div id="output">Die Antwort erscheint hier...</div>
-    </div>
-
-    <script type="module">
-        // Wir importieren die Google AI Library direkt über ein CDN
-        import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
-
-        const btn = document.getElementById('send-btn');
-        const output = document.getElementById('output');
-
-        btn.onclick = async () => {
-            const apiKey = document.getElementById('api-key').value;
-            const prompt = document.getElementById('user-input').value;
-
-            if (!apiKey || !prompt) {
-                alert("Bitte Key und Text eingeben!");
-                return;
-            }
-
-            btn.disabled = true;
-            output.innerText = "Überlege...";
-
-            try {
-                const genAI = new GoogleGenerativeAI(apiKey);
-                const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-
-                const result = await model.generateContent(prompt);
-                const response = await result.response;
-                output.innerText = response.text();
-            } catch (error) {
-                output.innerText = "Fehler: " + error.message;
-            } finally {
-                btn.disabled = false;
-            }
-        };
-    </script>
+    <div id="root"></div>
+    <script type="module" src="./index.tsx"></script>
 </body>
 </html>
